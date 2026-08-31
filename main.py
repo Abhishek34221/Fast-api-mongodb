@@ -7,9 +7,7 @@ from routes.get_user import router as user_router
 from routes.destination import router as destination_router
 
 
-
 connect_database()
-
 
 
 app = FastAPI(
@@ -19,14 +17,14 @@ app = FastAPI(
 
 
 # CORS
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "http://15.206.80.43:5000",
+
+        # Local development
         "http://127.0.0.1:5000",
         "http://localhost:5000",
-
-        # Agar Flask kisi aur port par chal raha ho
         "http://127.0.0.1:3000",
         "http://localhost:3000",
     ],
@@ -36,12 +34,9 @@ app.add_middleware(
 )
 
 
-
 app.include_router(auth_router)
 app.include_router(user_router)
 app.include_router(destination_router)
-
-
 
 
 @app.get("/health")
